@@ -28,6 +28,7 @@ Route::delete('/category/delete/{id}', [categoryController::class, 'destroy'])->
 Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name("category-edit");
 Route::put('/category/update/{id}', [CategoryController::class, 'update'])->name("category-update");
 
+
 // Route book admin
 Route::get('/book/index', [BookController::class, 'index'])->name("book-index");
 Route::get('/book/create', [BookController::class, 'create'])->name("book-create");
