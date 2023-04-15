@@ -7,8 +7,6 @@
                 <div class="row align-items-center">
                     <div class="col-md-8">
                         <h3>Daftar Buku</h3>
-
-                        
                     </div>
                     
                 </div>
@@ -68,8 +66,8 @@
                     <th>Penulis</th>
                     <th>Tahun Terbit</th>
                     <th>Status</th>
-                    <th>Status</th>
-                    <th>Status</th>
+                    {{-- <th>Status</th>
+                    <th>Status</th> --}}
                     <th>Opsi</th>
                 </tr>
             </thead>
@@ -82,8 +80,8 @@
                 <td>{{$item->author}}</td>
                 <td>{{$item->year}}</td>
                 <td>{{$item->status}}</td>
-                <td>{{$item->file_book}}</td>
-                <td>{{$item->cover_book}}</td>
+                {{-- <td>{{$item->file_book}}</td>
+                <td>{{$item->cover_book}}</td> --}}
                 <td>
                     <a class="btn btn-primary" href="{{route("book-edit", $item->id)}}">
                         Edit

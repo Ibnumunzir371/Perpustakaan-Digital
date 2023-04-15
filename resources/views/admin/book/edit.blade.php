@@ -31,7 +31,7 @@
 @extends('backend.master')
 @section('content')
 <div class="card card-body">
-    <form action="" method="post" enctype="multipart/form-data">
+    <form action="{{route("book-update", $book->id)}}" method="post" enctype="multipart/form-data">
         @csrf
         @method("put")
         <h1>Tambahkan Data</h1>
@@ -45,13 +45,13 @@
             @enderror
         </div>
         <div class="form-group">
-            <label for="name" class="form-label">Pilih Kategori</label>
+            <label for="category_id" class="form-label">Pilih Kategori</label>
             <select class="form-control" name="category_id" id="category_id">
                 @foreach ($category as $item)
                     <option @if ($book->category_id == $item->id) selected @endif value="{{$item->id}}">{{$item->name}}</option>
                 @endforeach
             </select>
-            @error('name')
+            @error('category_id')
             <span class="text-danger">
                 <strong>{{ $message }}</strong>
             </span>
@@ -85,9 +85,9 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label for="file_book" class="form-label">File Buku</label>
+            <label for="format" class="form-label">File Buku</label>
             <div class="input-groub">
-                <input name="file_book" value="{{$book->file_book}}" type="file" class="form-control" id="file_book" >
+                <input name="format" value="{{ asset('storage/'.$book->file_book) }}" type="file" class="form-control">
             </div>
             @error('file_book')
             <span class="text-danger">
@@ -96,10 +96,13 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label for="cover_book" class="form-label">Cover Buku</label>
+            <label for="image" class="form-label">Cover Buku</label>
             <div class="input-groub">
-                <input name="cover_book" value="{{$book->cover_book}}" type="file" class="form-control" id="cover_book" >
+                <input name="image" type="file" class="form-control" id="cover_book" >
             </div>
+            <br>
+            <img src="{{ asset('storage/'.$book->cover_book) }}" width="200">
+            <br>
             @error('cover_book')
             <span class="text-danger">
                 <strong>{{ $message }}</strong>

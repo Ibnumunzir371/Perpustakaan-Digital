@@ -25,25 +25,41 @@ class BookController extends Controller
     }
 
     public function store(Request $request){
+        $this->validate($request, [
+            'name' => 'required',
+            'author' => 'required',
+            'year' => 'required',
+            'status' => 'required',
+            'category_id' => 'required',
+            'cover_book' => 'required','mimes:jpg,png,jpeg|image|max:2048',
+            'file_book' => 'required','mimes:pdf',
+        ]);
+        
+        // mengupload gambar tanpa required
+        // $newName = '';
+        // if($request->file('image')){
+        //     $extension = $request->file('image')->getClientOriginalExtension();
+        //     $newName = $request->name.'-'.now()->timestamp.'.'.$extension;
+        //     $request->file('image')->storeAs('images', $newName);
+        // }
+        
+        // $request['cover_book'] = $newName;
+
         $book = book::create($request->all());
-        // if($request->hasfile('file_book')){
-        //     $request->file('file_book')->move('backend/document/',$request->file('file_book')->getClientOriginalName());
-        //     $book->file_book = $request->file('file_book')->getClientOriginalName();
-        //     $book->save();
-        // }
-        // if($request->hasfile('cover_book')){
-        //     $request->file('cover_book')->move('backend/images/',$request->file('cover_book')->getClientOriginalName());
-        //     $book->cover_book = $request->file('cover_book')->getClientOriginalName();
-        //     $book->save();
-        // }
+        if ($request->file('file_book')){
+            $path = $request->file('file_book')->store('file','public');
+            // $url = Storage::url($path);
+            $book->file_book = $path;
+        }
+        
+        if ($request->file('image')){
+            $path = $request->file('image')->store('images','public');
+            // $url = Storage::url($path);
+            $book->cover_book = $path;
+        }
 
-        $path = $request->file('file_book')->store('file','public');
-        $url = Storage::url($path);
-        // return $url;
+        $book->save();
 
-        $path = $request->file('cover_book')->store('images','public');
-        $url = Storage::url($path);
-        // return $url;
         return redirect()->route("book-index");
         
     }
@@ -59,6 +75,19 @@ class BookController extends Controller
     public function destroy($id){
         $book = book::where("id", $id)->first();
         $book ->delete();
+
+        return redirect()->route("book-index");
+    }
+
+    public function update(Request $request, $id){
+        $book = book::where("id", $id)->first();
+        $book->update($request->all());
+
+        // if ($request->hasFile('cover_book')){
+        //     Storage::delete($book->cover_book);
+        //     $path = $request->file('cover_book')->store('images','public');
+        //     $book->cover_book = $path;
+        // }
 
         return redirect()->route("book-index");
     }
