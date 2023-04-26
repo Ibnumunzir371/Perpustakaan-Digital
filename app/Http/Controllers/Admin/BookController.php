@@ -31,8 +31,8 @@ class BookController extends Controller
             'year' => 'required',
             'status' => 'required',
             'category_id' => 'required',
-            'cover_book' => 'required','mimes:jpg,png,jpeg|image|max:2048',
-            'file_book' => 'required','mimes:pdf',
+            'cover_book' => 'required|image|mimes:jpg,png,jpeg|max:2048',
+            'file_book' => 'required|mimes:pdf',
         ]);
         
         // mengupload gambar tanpa required
@@ -45,17 +45,25 @@ class BookController extends Controller
         
         // $request['cover_book'] = $newName;
 
-        $book = book::create($request->all());
+        // $book = book::create($request->all());
+        $book = new book;
+        $book->name = $request->get('name');
+        $book->category_id = $request->get('category_id');
+        $book->author = $request->get('author');
+        $book->year = $request->get('year');
+        $book->status = $request->get('status');
+        
+
         if ($request->file('file_book')){
-            $path = $request->file('file_book')->store('file','public');
+            $pdf = $request->file('file_book')->store('file','public');
             // $url = Storage::url($path);
-            $book->file_book = $path;
+            $book->file_book = $pdf;
         }
         
-        if ($request->file('image')){
-            $path = $request->file('image')->store('images','public');
+        if ($request->file('cover_book')){
+            $image = $request->file('cover_book')->store('images','public');
             // $url = Storage::url($path);
-            $book->cover_book = $path;
+            $book->cover_book = $image;
         }
 
         $book->save();

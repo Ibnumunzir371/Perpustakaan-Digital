@@ -57,7 +57,7 @@
         <div class="mb-3">
             <label for="file_book" class="form-label">File Buku</label>
             <div class="input-groub">
-                <input name="file_book" type="file" class="form-control" accept="pdf/*" >
+                <input name="file_book" type="file" class="form-control" >
             </div>
             @error('file_book')
             <span class="text-danger">
@@ -66,9 +66,9 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label for="image" class="form-label">Cover Buku</label>
+            <label for="cover_book" class="form-label">Cover Buku</label>
             <div class="input-groub">
-                <input name="image" type="file" accept ="image/*" class="form-control" > 
+                <input name="cover_book" type="file" accept ="image/*" class="form-control" > 
             </div>
             @error('cover_book')
             <span class="text-danger">
