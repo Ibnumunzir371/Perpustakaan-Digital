@@ -97,11 +97,12 @@
         </div>
         <div class="mb-3">
             <label for="image" class="form-label">Cover Buku</label>
+            <small class="text-muted">(Kosongkan jika tidak ingin mengubah gambar)</small>
             <div class="input-groub">
-                <input name="image" type="file" class="form-control" id="cover_book" >
+                <input name="image" type="file" class="form-control" accept ="image/*" onchange="loadFile(event)" id="cover_book" >
             </div>
             <br>
-            <img src="{{ asset('storage/'.$book->cover_book) }}" width="200">
+            <img id="output" src="{{ asset('storage/'.$book->cover_book) }}" width="200">
             <br>
             @error('cover_book')
             <span class="text-danger">

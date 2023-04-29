@@ -24,7 +24,7 @@
       </a>
       <div class="collapse" id="tables">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{{route("book-index")}}">Basic table</a></li>
+          <li class="nav-item"> <a class="nav-link" href="">Basic table</a></li>
         </ul>
       </div>
     </li>
@@ -34,11 +34,11 @@
         <span class="menu-title">Icons</span>
         <i class="menu-arrow"></i>
       </a>
-      <div class="collapse" id="icons">
+      {{-- <div class="collapse" id="icons">
         <ul class="nav flex-column sub-menu">
           <li class="nav-item"> <a class="nav-link" href="pages/icons/mdi.html">Mdi icons</a></li>
         </ul>
-      </div>
+      </div> --}}
     </li>
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">

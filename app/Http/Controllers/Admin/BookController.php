@@ -28,7 +28,7 @@ class BookController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'author' => 'required',
-            'year' => 'required',
+            'year' => 'required|numeric',
             'status' => 'required',
             'category_id' => 'required',
             'cover_book' => 'required|image|mimes:jpg,png,jpeg|max:2048',
@@ -74,7 +74,7 @@ class BookController extends Controller
 
     public function edit($id){
         $category = category::all();
-        $book = book::where("id", $id)->first();
+        $book = book::findOrFail($id);
         // return response()->json($book,$category);
         // dd($book,$category);
         return view('admin.book.edit', compact("book","category"));
@@ -88,15 +88,51 @@ class BookController extends Controller
     }
 
     public function update(Request $request, $id){
-        $book = book::where("id", $id)->first();
-        $book->update($request->all());
+        // $book = book::where("id", $id)->first();
+        // $book->update($request->all());
 
-        // if ($request->hasFile('cover_book')){
-        //     Storage::delete($book->cover_book);
-        //     $path = $request->file('cover_book')->store('images','public');
-        //     $book->cover_book = $path;
-        // }
+        // $this->validate($request, [
+        //     'name' => 'required',
+        //     'author' => 'required',
+        //     'year' => 'required|numeric',
+        //     'status' => 'required',
+        //     'category_id' => 'required',
+        //     'cover_book' => 'image|mimes:jpg,png,jpeg|max:2048',
+        //     'file_book' => 'mimes:pdf',
+        // ]);
+        
+        $book = book::findOrFail($id);
+        $book->name = $request->get('name');
+        $book->category_id = $request->get('category_id');
+        $book->author = $request->get('author');
+        $book->year = $request->get('year');
+        $book->status = $request->get('status');
 
+        $new_file = $request->file('file_book');
+        if ($new_file){
+            if ($book->file_book && file_exists(storage_path('app/public/' .$book->file_book))){
+                Storage::delete('public/' .$book->file_book); // menghapus file lama
+            }
+            // Storage::delete('public/'.$book->file_book); // menghapus file lama
+            $file = $new_file->store('file','public');
+            $book->file_book = $file;
+        }
+        
+        $new_image = $request->file('cover_book');
+        if ($new_image){
+            if ($book->cover_book && file_exists(storage_path('app/public/' .$book->cover_book))){
+                Storage::delete('public/' .$book->cover_book); // menghapus file lama
+            }
+            // Storage::delete('public/'.$book->cover_book); // menghapus file lama
+            $image = $new_image->store('images','public');
+            $book->cover_book = $image;
+        }
+        
+        $book->save();
+
+        // return response()->json($book);
         return redirect()->route("book-index");
+
     }
+    
 }
