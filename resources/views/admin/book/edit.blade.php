@@ -86,6 +86,7 @@
         </div>
         <div class="mb-3">
             <label for="format" class="form-label">File Buku</label>
+            <small class="text-muted">(Kosongkan jika tidak ingin mengubah file)</small>
             <div class="input-groub">
                 <input name="format" value="{{ asset('storage/'.$book->file_book) }}" type="file" class="form-control">
             </div>

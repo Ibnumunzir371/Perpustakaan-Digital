@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Admin\BookController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\HomeController;
 use App\Models\category;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +19,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('backend.master');
+    // return view('backend.master');
+    return view('auth.login');
 });
 
 // Route category admin
@@ -36,3 +39,9 @@ Route::post('/book/store', [BookController::class, 'store'])->name("book-store")
 Route::get('/book/edit/{id}', [BookController::class, 'edit'])->name("book-edit");
 Route::delete('/book/destroy/{id}', [BookController::class, 'destroy'])->name("book-destroy");
 Route::put('/book/update/{id}', [BookController::class, 'update'])->name("book-update");
+
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/dashbord/index', [HomeController::class, 'index'])->name("dashbord");
+
+Auth::routes();
