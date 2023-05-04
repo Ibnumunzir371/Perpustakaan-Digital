@@ -85,10 +85,10 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label for="format" class="form-label">File Buku</label>
+            <label for="file_book" class="form-label">File Buku</label>
             <small class="text-muted">(Kosongkan jika tidak ingin mengubah file)</small>
             <div class="input-groub">
-                <input name="format" value="{{ asset('storage/'.$book->file_book) }}" type="file" class="form-control">
+                <input name="file_book" value="{{ asset('storage/'.$book->file_book) }}" type="file" class="form-control">
             </div>
             @error('file_book')
             <span class="text-danger">
@@ -97,13 +97,13 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label for="image" class="form-label">Cover Buku</label>
+            <label for="cover_book" class="form-label">Cover Buku</label>
             <small class="text-muted">(Kosongkan jika tidak ingin mengubah gambar)</small>
             <div class="input-groub">
-                <input name="image" type="file" class="form-control" accept ="image/*" onchange="loadFile(event)" id="cover_book" >
+                <input name="cover_book" type="file" class="form-control" onchange="previewImg()" accept ="image/*" id="cover_book" >
             </div>
             <br>
-            <img id="output" src="{{ asset('storage/'.$book->cover_book) }}" width="200">
+            <img id="output" src="{{ asset('storage/'.$book->cover_book) }}" width="200" class="img-fluid img-preview">
             <br>
             @error('cover_book')
             <span class="text-danger">

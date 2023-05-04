@@ -91,15 +91,15 @@ class BookController extends Controller
         // $book = book::where("id", $id)->first();
         // $book->update($request->all());
 
-        // $this->validate($request, [
-        //     'name' => 'required',
-        //     'author' => 'required',
-        //     'year' => 'required|numeric',
-        //     'status' => 'required',
-        //     'category_id' => 'required',
-        //     'cover_book' => 'image|mimes:jpg,png,jpeg|max:2048',
-        //     'file_book' => 'mimes:pdf',
-        // ]);
+        $this->validate($request, [
+            'name' => 'required',
+            'author' => 'required',
+            'year' => 'required|numeric',
+            'status' => 'required',
+            'category_id' => 'required',
+            'cover_book' => 'image|mimes:jpg,png,jpeg|max:2048',
+            'file_book' => 'mimes:pdf',
+        ]);
         
         $book = book::findOrFail($id);
         $book->name = $request->get('name');
@@ -108,23 +108,44 @@ class BookController extends Controller
         $book->year = $request->get('year');
         $book->status = $request->get('status');
 
-        $new_file = $request->file('file_book');
-        if ($new_file){
-            if ($book->file_book && file_exists(storage_path('app/public/' .$book->file_book))){
-                Storage::delete('public/' .$book->file_book); // menghapus file lama
-            }
-            // Storage::delete('public/'.$book->file_book); // menghapus file lama
-            $file = $new_file->store('file','public');
-            $book->file_book = $file;
-        }
+        // $new_file = $request->file('file_book');
+        // if ($new_file){
+        //     if ($book->file_book && file_exists(storage_path('app/public/' .$book->file_book))){
+        //         Storage::delete('public/' .$book->file_book); // menghapus file lama
+        //     }
+        //     // Storage::delete('public/'.$book->file_book); // menghapus file lama
+        //     $file = $new_file->store('file','public');
+        //     $book->file_book = $file;
+        // }
         
-        $new_image = $request->file('cover_book');
-        if ($new_image){
-            if ($book->cover_book && file_exists(storage_path('app/public/' .$book->cover_book))){
-                Storage::delete('public/' .$book->cover_book); // menghapus file lama
-            }
-            // Storage::delete('public/'.$book->cover_book); // menghapus file lama
-            $image = $new_image->store('images','public');
+        // $new_image = $request->file('cover_book');
+        // if ($new_image){
+        //     if ($book->cover_book && file_exists(storage_path('app/public/' .$book->cover_book))){
+        //         Storage::delete('public/' .$book->cover_book); // menghapus file lama
+        //     }
+        //     // Storage::delete('public/'.$book->cover_book); // menghapus file lama
+        //     $image = $new_image->store('images','public');
+        //     $book->cover_book = $image;
+        // }
+        
+        // Ketika melakukan pengecekan apakah file lama masih ada atau sudah dihapus,
+        // perlu diganti fungsi file_exists dengan fungsi Storage::disk(). 
+        // Hal ini karena saat menggunakan fungsi file_exists, 
+        // terkadang tidak berhasil dalam menemukan file yang sudah terhapus.
+
+        if ($request->file('file_book')){
+            // hapus file yang lama
+            Storage::disk('public')->delete($book->file_book);
+            // simpan file yang baru
+            $pdf = $request->file('file_book')->store('file', 'public');
+            $book->file_book = $pdf;
+        }
+    
+        if ($request->file('cover_book')){
+            // hapus file yang lama
+            Storage::disk('public')->delete($book->cover_book);
+            // simpan file yang baru
+            $image = $request->file('cover_book')->store('images', 'public');
             $book->cover_book = $image;
         }
         
