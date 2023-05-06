@@ -110,38 +110,29 @@ class BookController extends Controller
         $book->year = $request->get('year');
         $book->status = $request->get('status');
 
-        // $new_file = $request->file('file_book');
-        // if ($new_file){
-        //     if ($book->file_book && file_exists(storage_path('app/public/' .$book->file_book))){
-        //         Storage::delete('public/' .$book->file_book); // menghapus file lama
-        //     }
-        //     // Storage::delete('public/'.$book->file_book); // menghapus file lama
-        //     $file = $new_file->store('file','public');
-        //     $book->file_book = $file;
-        // }
-        
-        // $new_image = $request->file('cover_book');
-        // if ($new_image){
-        //     if ($book->cover_book && file_exists(storage_path('app/public/' .$book->cover_book))){
-        //         Storage::delete('public/' .$book->cover_book); // menghapus file lama
-        //     }
-        //     // Storage::delete('public/'.$book->cover_book); // menghapus file lama
-        //     $image = $new_image->store('images','public');
-        //     $book->cover_book = $image;
-        // }
-        
         // Ketika melakukan pengecekan apakah file lama masih ada atau sudah dihapus,
         // perlu diganti fungsi file_exists dengan fungsi Storage::disk(). 
         // Hal ini karena saat menggunakan fungsi file_exists, 
         // terkadang tidak berhasil dalam menemukan file yang sudah terhapus.
 
+        $pdf = '';
         if ($request->file('file_book')){
             // hapus file yang lama
             Storage::disk('public')->delete($book->file_book);
+            $extension = $request->file('file_book')->getClientOriginalExtension();
+            $pdf = $request->name.'.'.$extension;
             // simpan file yang baru
-            $pdf = $request->file('file_book')->store('file', 'public');
+            $request->file('file_book')->storeAs('file',$pdf);
+            // $url = Storage::url($path);
             $book->file_book = $pdf;
         }
+        // if ($request->file('file_book')){
+        //     // hapus file yang lama
+        //     Storage::disk('public')->delete($book->file_book);
+        //     // simpan file yang baru
+        //     $pdf = $request->file('file_book')->store('file', 'public');
+        //     $book->file_book = $pdf;
+        // }
     
         if ($request->file('cover_book')){
             // hapus file yang lama
