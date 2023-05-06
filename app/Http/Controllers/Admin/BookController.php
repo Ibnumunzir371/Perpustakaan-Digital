@@ -26,7 +26,7 @@ class BookController extends Controller
 
     public function store(Request $request){
         $this->validate($request, [
-            'name' => 'required',
+            'name' => 'required|unique:books',
             'author' => 'required',
             'year' => 'required|numeric',
             'status' => 'required',
@@ -52,10 +52,12 @@ class BookController extends Controller
         $book->author = $request->get('author');
         $book->year = $request->get('year');
         $book->status = $request->get('status');
-        
 
+        $pdf = '';
         if ($request->file('file_book')){
-            $pdf = $request->file('file_book')->store('file','public');
+            $extension = $request->file('file_book')->getClientOriginalExtension();
+            $pdf = $request->name.'.'.$extension;
+            $request->file('file_book')->storeAs('file',$pdf);
             // $url = Storage::url($path);
             $book->file_book = $pdf;
         }
