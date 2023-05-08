@@ -25,8 +25,10 @@
   <!-- End plugin css for this page -->
   <!-- inject:css -->
   <link rel="stylesheet" href="{{asset("backend/css/vertical-layout-light/style.css")}}">
+  <link rel="stylesheet" href="{{asset("backend/css/vertical-layout-light/dashboard.css")}}">
   <!-- endinject -->
   <link rel="shortcut icon" href="{{asset("backend/images/favicon.png")}}">
   {{-- link datatables --}}
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   

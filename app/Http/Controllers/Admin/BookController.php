@@ -56,7 +56,7 @@ class BookController extends Controller
         $pdf = '';
         if ($request->file('file_book')){
             $extension = $request->file('file_book')->getClientOriginalExtension();
-            $pdf = $request->name.'.'.$extension;
+            $pdf = $request->name.'-'.time().'.'.$extension;
             $request->file('file_book')->storeAs('file',$pdf);
             // $url = Storage::url($path);
             $book->file_book = $pdf;
@@ -83,8 +83,19 @@ class BookController extends Controller
     }
 
     public function destroy($id){
-        $book = book::where("id", $id)->first();
-        $book ->delete();
+        // $book = book::where("id", $id)->first();
+        // $book ->delete();
+        $book = book::findOrFail($id);
+        // $pathfile = $book->file_book;
+        // hapus file yang terkait dengan buku
+        // if($pathfile != null || $pathfile != ''){
+        //     Storage::disk('public')->delete($pathfile);
+        // }
+       
+        // Storage::disk('public')->delete('storage/'.$book->cover_book);
+
+        // hapus record buku dari database
+        $book->delete();
 
         return redirect()->route("book-index");
     }
@@ -120,7 +131,7 @@ class BookController extends Controller
             // hapus file yang lama
             Storage::disk('public')->delete($book->file_book);
             $extension = $request->file('file_book')->getClientOriginalExtension();
-            $pdf = $request->name.'.'.$extension;
+            $pdf = $request->name.'-'.time().'.'.$extension;
             // simpan file yang baru
             $request->file('file_book')->storeAs('file',$pdf);
             // $url = Storage::url($path);

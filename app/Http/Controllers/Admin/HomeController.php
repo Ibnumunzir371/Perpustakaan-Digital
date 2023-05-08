@@ -3,7 +3,7 @@
 // namespace App\Http\Controllers\Admin;
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
-
+use App\Models\book;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -25,6 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.dashbord.home');
+        $bookcount = book::count();
+        // $membercount =
+        return view('admin.dashbord.home', compact('bookcount'));
     }
 }
