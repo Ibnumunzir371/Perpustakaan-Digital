@@ -26,7 +26,7 @@
 @extends('backend.master')
 
 @section('content')
-
+<div class="container">
     <h1>Welcome, {{Auth::user()->name}}</h1>
 
     <div class="row mt-5">
@@ -36,7 +36,7 @@
                     <div class="col-6"><i class="bi bi-people"></i></div>
                     <div class="col-6 d-flex flex-column justify-content-center align-items-end">
                         <div class="card-desc">Total Members</div>
-                        <div class="card-count">100</div>
+                        <div class="card-count">{{$membercount}}</div>
                     </div>
                 </div>
             </div>
@@ -75,4 +75,5 @@
             </div>
         </div>
     </div>
+</div>
 @endsection

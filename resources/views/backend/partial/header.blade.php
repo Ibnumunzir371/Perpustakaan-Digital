@@ -20,19 +20,23 @@
       </li>
     </ul> --}}
     <ul class="navbar-nav navbar-nav-right">
-      <li class="nav-item nav-profile dropdown">
+      <li class="nav-item nav-profile dropdown" >
         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown" role="button">
           <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->name }}</span>
           <img src="{{asset("backend/images/faces/face28.jpg")}}" alt="profile"/>
         </a>
         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown" >
-          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal" >
-            {{-- <i class="ti-power-off text-primary"></i>
-            Logout --}}
+          <a class="dropdown-item" data-toggle="modal" data-target="#logoutModal" >
+            {{-- <form action="{{('logout')}}" method="POST">
+              @csrf
+              <i class="ti-power-off text-primary"></i>
+              Logout --}}
             <form action="{{('logout')}}" method="POST">
               @csrf
-              <button class="btn btn-primary">Logout</button>
+              <button class="btn btn-light"><i class="ti-power-off text-primary"></i>Logout</button>
+              
             </form>
+            {{-- </form> --}}
           </a>
         </div>
       </li>

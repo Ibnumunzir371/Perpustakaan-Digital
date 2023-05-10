@@ -56,7 +56,7 @@ class BookController extends Controller
         $pdf = '';
         if ($request->file('file_book')){
             $extension = $request->file('file_book')->getClientOriginalExtension();
-            $pdf = $request->name.'-'.time().'.'.$extension;
+            $pdf = $request->name.'.'.$extension;
             $request->file('file_book')->storeAs('file',$pdf);
             // $url = Storage::url($path);
             $book->file_book = $pdf;
@@ -89,15 +89,15 @@ class BookController extends Controller
         // $pathfile = $book->file_book;
         // hapus file yang terkait dengan buku
         // if($pathfile != null || $pathfile != ''){
-        //     Storage::disk('public')->delete($pathfile);
+        // $coba = Storage::disk('public')->delete($book->file_book);
         // }
-       
-        // Storage::disk('public')->delete('storage/'.$book->cover_book);
+        // Storage::delete('public/file'.$book->file_book);
 
         // hapus record buku dari database
         $book->delete();
 
         return redirect()->route("book-index");
+        // return($coba);
     }
 
     public function update(Request $request, $id){
@@ -131,12 +131,20 @@ class BookController extends Controller
             // hapus file yang lama
             Storage::disk('public')->delete($book->file_book);
             $extension = $request->file('file_book')->getClientOriginalExtension();
-            $pdf = $request->name.'-'.time().'.'.$extension;
+            $pdf = $request->name.'.'.$extension;
             // simpan file yang baru
             $request->file('file_book')->storeAs('file',$pdf);
             // $url = Storage::url($path);
             $book->file_book = $pdf;
         }
+        // $pdf = '';
+        // if ($request->file('file_book')){
+        //     $extension = $request->file('file_book')->getClientOriginalExtension();
+        //     $pdf = $request->name.'-'.time().'.'.$extension;
+        //     $request->file('file_book')->storeAs('file',$pdf);
+        //     // $url = Storage::url($path);
+        //     $book->file_book = $pdf;
+        // }
         // if ($request->file('file_book')){
         //     // hapus file yang lama
         //     Storage::disk('public')->delete($book->file_book);

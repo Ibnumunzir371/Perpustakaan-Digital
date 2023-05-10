@@ -16,6 +16,11 @@
           <i class="icon-paper menu-icon"></i>
           <span class="menu-title">Kategori Buku</span></a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{route("member-index")}}" aria-expanded="false">
+          <i class="icon-paper menu-icon"></i>
+          <span class="menu-title">User/Member</span></a>
+    </li>
     {{-- <div class="collapse" id="tables">
       <ul class="nav flex-column sub-menu">
         <li class="nav-item"> <a class="nav-link" href="{{route("book-index")}}">Basic table</a></li>

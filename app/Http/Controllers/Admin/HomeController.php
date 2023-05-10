@@ -4,6 +4,7 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\book;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -26,7 +27,8 @@ class HomeController extends Controller
     public function index()
     {
         $bookcount = book::count();
+        $membercount = User::count();
         // $membercount =
-        return view('admin.dashbord.home', compact('bookcount'));
+        return view('admin.dashbord.home', compact('bookcount','membercount'));
     }
 }

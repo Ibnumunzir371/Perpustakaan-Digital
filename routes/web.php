@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\BookController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\MemberController;
 use App\Models\category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -40,6 +41,10 @@ Route::get('/book/edit/{id}', [BookController::class, 'edit'])->name("book-edit"
 Route::delete('/book/destroy/{id}', [BookController::class, 'destroy'])->name("book-destroy");
 Route::put('/book/update/{id}', [BookController::class, 'update'])->name("book-update");
 
+// Route member admin
+Route::get('/member/index', [MemberController::class, 'index'])->name("member-index");
+// Route::get('/member/edit/{id}', [MemberController::class, 'edit'])->name("member-edit");
+Route::delete('/member/destroy/{id}', [MemberController::class, 'destroy'])->name("member-destroy");
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/dashbord/index', [HomeController::class, 'index'])->name("dashbord");

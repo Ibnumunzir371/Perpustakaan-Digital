@@ -103,6 +103,22 @@
               <form class="pt-3" method="POST" action="{{ route('register')}}">
                 @csrf
                 <div class="form-group">
+                  <input name="nis" type="text" class="form-control form-control-lg @error('nis') is-invalid @enderror" id="nis" placeholder="Masukkan Nis">
+                    @error('nis')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                  <input name="class" type="text" class="form-control form-control-lg @error('class') is-invalid @enderror" id="class" placeholder="Masukkan class">
+                    @error('class')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group">
                   <input name="name" type="text" class="form-control form-control-lg @error('name') is-invalid @enderror" id="exampleInputUsername1" placeholder="Username">
                     @error('name')
                         <span class="invalid-feedback" role="alert">
