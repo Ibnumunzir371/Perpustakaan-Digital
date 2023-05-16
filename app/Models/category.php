@@ -12,5 +12,11 @@ class category extends Model
     protected $fillable = [
         'name',
     ];
+
+    // public function book()
+    // {
+    //     // return $this->belongsTo(category::class);
+    //     return $this->hasMany(book::class);
+    // }
 }
 

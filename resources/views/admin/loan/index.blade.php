@@ -6,7 +6,7 @@
         <div class="page-block">
                 <div class="row align-items-center">
                     <div class="col-md-8">
-                        <h3>Daftar Pengguna</h3>
+                        <h3>Daftar Peminjaman</h3>
 
                         {{-- <ul class="breadcrumb">
                             <li class="breadcrumb-item">Koleksi Ebook</li>
@@ -16,24 +16,26 @@
                     
                 </div>
             <hr class="sidebar-divider">
-            <div>
+            {{-- <div>
                 <a href=""><button class="btn btn-primary">+ User</button></a>
             </div>
-        </div>
+        </div> --}}
     </div>
 
         <table id="myTable" class="display">
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Nis</th>
-                    <th>Kelas</th>
-                    <th>Username</th>
-                    <th>Gmail</th>
+                    <th>Nama</th>
+                    <th>Tanggal Pinjam</th>
+                    <th>Tanggal Kembali</th>
+                    <th>Judul Buku</th>
+                    <th>Status</th>
+                    <th>Reg Kembali</th>
                     <th>Opsi</th>
                 </tr>
             </thead>
-            <tbody>
+            {{-- <tbody>
                 @foreach ($member as $key => $item)
                 <tr>
                 <th scope="row">{{$key + 1}}</th>
@@ -56,7 +58,7 @@
                 </td>
                 </tr>
                 @endforeach
-            </tbody>
+            </tbody> --}}
         </table>
         
     @section('script')
@@ -67,5 +69,4 @@
     </script>
     @endsection
 </div>
-
 @endsection

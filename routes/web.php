@@ -3,7 +3,11 @@
 use App\Http\Controllers\Admin\BookController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\LoanController;
 use App\Http\Controllers\Admin\MemberController;
+use App\Http\Controllers\Landingpage\HomeController as LandingpageHomeController;
+use App\Http\Controllers\Landingpage\ListbookController;
+use App\Http\Controllers\LandingpageController;
 use App\Models\category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -45,6 +49,13 @@ Route::put('/book/update/{id}', [BookController::class, 'update'])->name("book-u
 Route::get('/member/index', [MemberController::class, 'index'])->name("member-index");
 // Route::get('/member/edit/{id}', [MemberController::class, 'edit'])->name("member-edit");
 Route::delete('/member/destroy/{id}', [MemberController::class, 'destroy'])->name("member-destroy");
+
+//Route Loan admin
+Route::get('/loan/index', [LoanController::class, 'index'])->name("loan-index");
+
+//Route Landingpage
+Route::get('/landingpage/index', [LandingpageHomeController::class, 'index'])->name("landingpage-index");
+Route::get('/book-category/{id}', [LandingpageHomeController::class, 'book_category'])->name("book-category");
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/dashbord/index', [HomeController::class, 'index'])->name("dashbord");
