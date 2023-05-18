@@ -76,4 +76,37 @@
         </div>
     </div>
 </div>
+
+<div class="card card-body mt-5">
+    <div class="page-header">
+        <div class="page-block">
+                <div class="row align-items-center ">
+                    <div class="col-md-8">
+                        <h3>Buku Pinjamanku</h3>
+                    </div>
+                    
+                </div>
+            <hr class="sidebar-divider">
+        </div>
+        <div class="mt-4">
+            <div class="row">
+                <div class="col py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Daftar Transaksi Masuk</h6>
+                </div>
+                
+                <div class="col text-right">
+                    <button type="button" class="btn btn-primary plus" data-bs-toggle="modal" data-bs-target="#pemasukanModal">
+                        <span data-feather="plus"></span>
+                        Tambah Pemasukan
+                    </button>
+                </div>
+            </div>
+            <div>
+                <h5 class="card-tittle">judul</h5>
+                <p class="card-text">Tanggal kembali : </p>
+            </div>
+            
+        </div>
+    </div>
+</div>
 @endsection

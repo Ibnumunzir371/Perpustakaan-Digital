@@ -10,6 +10,7 @@ class HomeController extends Controller
 {
     public function index(Request $request){
         $category = category::all();
+        // $books = book::where("category","");
         $bookall = book::latest()->get();
 
         return view('landingpage.index', compact("category","bookall"));

@@ -6,6 +6,7 @@
         <span class="menu-title">Dashboard</span>
       </a>
     </li>
+    @if (Auth::user()->role == "admin")
     <li class="nav-item">
       <a class="nav-link" href="{{route("book-index")}}" aria-expanded="false">
           <i class="icon-book menu-icon"></i>
@@ -26,6 +27,7 @@
          <i class="bi bi-people menu-icon"></i>
           <span class="menu-title">Peminjaman</span></a>
     </li>
+    @endif
     <li class="nav-item">
       <a class="nav-link" href="{{route("landingpage-index")}}" aria-expanded="false">
          <i class="bi bi-people menu-icon"></i>

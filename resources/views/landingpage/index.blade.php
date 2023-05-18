@@ -28,13 +28,15 @@
 <div class="container-fluid position-relative p-0">
     <nav class="navbar navbar-expand-lg navbar-dark px-5 py-3 py-lg-0">
         <a href="index.html" class="navbar-brand p-0">
-            <h1 class="m-0"><i class="fa fa-user-tie me-2"></i>Startup</h1>
+            <h1 class="m-0"><img src="{{asset("backend/images/logo-mini.svg")}}"> E-LIBRARY</h1>
+            {{-- <a class="navbar-brand brand-logo mr-5" href="#"><img src="{{asset("backend/images/logo-web2.png")}}" class="mr-2" alt="logo"/></a> --}}
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="fa fa-bars"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
+                    <a href="{{route("landingpage-index")}}" class="nav-item nav-link">Home</a>
                 @foreach ($category as $item)
                     <a href="{{route("book-category",$item->id)}}" class="nav-item nav-link">{{$item->name}}</a>
                 @endforeach   
@@ -52,11 +54,14 @@
     <div class="container-fluid bg-primary py-5 bg-header" style="margin-bottom: 90px;">
         <div class="row py-5">
             <div class="col-12 pt-lg-5 mt-lg-5 text-center">
-                <h1 class="display-4 text-white animated zoomIn">Lihat Book</h1>
+                <h1 class="display-4 text-white animated zoomIn">Lihat Buku</h1>
                 <a href="" class="h5 text-white">Home</a>
                 <i class="far fa-circle text-white px-2"></i>
-                
-                    <a href="" class="h5 text-white">{{$books->category->name}}</a>
+                @foreach ($category as $item)
+                    <a href="" class="h5 text-white">{{$item->name}}</a>
+                @endforeach
+                    
+                    {{-- <a href="" class="h5 text-white">{{$books->category->name}}</a> --}}
             </div>
         </div>
     </div>
