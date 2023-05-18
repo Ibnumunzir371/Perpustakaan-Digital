@@ -10,12 +10,8 @@ class HomeController extends Controller
 {
     public function index(Request $request){
         $category = category::all();
-        // $books = book::where("category","");
-        $bookall = book::latest()->get();
-
-        return view('landingpage.index', compact("category","bookall"));
-        // return response()->json($categorys);
-        // debug mencara kesalahan 
+        return view('landingpage.index', compact("category"));
+        
     }
 
     public function book_category($id){
@@ -23,7 +19,7 @@ class HomeController extends Controller
         $books = book::findOrFail($id);
         $bookall = $books->with("category")->where("category_id",$id)->get();
         
-        return view('landingpage.index', compact("category","bookall","books"));
+        return view('landingpage.detail-book', compact("category","bookall","books"));
 
         // return $books;
     }
