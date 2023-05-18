@@ -115,7 +115,6 @@
     </div>
 </div>
 
-
 <!-- Footer Start -->
 @include('landingpage.partial.footer')
 
