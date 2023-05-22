@@ -64,7 +64,7 @@ Route::middleware('auth','CheckRole:admin')->group(function () {
 Route::middleware('auth','CheckRole:admin,user')->group(function () {
     //Route Landingpage
     Route::get('/landingpage/index', [LandingpageHomeController::class, 'index'])->name("landingpage-index");
-    Route::get('/book-category/{id}', [LandingpageHomeController::class, 'book_category'])->name("book-category");
+    Route::get('/landingpage/listbook/{id}', [LandingpageHomeController::class, 'listbook'])->name("landingpage-listbook");
 
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/dashbord/index', [HomeController::class, 'index'])->name("dashbord");

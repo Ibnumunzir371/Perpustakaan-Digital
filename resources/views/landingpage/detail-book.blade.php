@@ -35,15 +35,37 @@
             <span class="fa fa-bars"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav ms-auto py-0">
-                    <a href="{{route("landingpage-index")}}" class="nav-item nav-link">Home</a>
-                @foreach ($category as $item)
-                    <a href="{{route("book-category",$item->id)}}" class="nav-item nav-link">{{$item->name}}</a>
-                @endforeach   
+                <div class="navbar-nav ms-auto py-0">
+                    <a href="{{route("landingpage-index")}}" class="nav-item nav-link active">Home</a>
+                    <a href="#" class="nav-item nav-link">About</a>
+                    <a href="#" class="nav-item nav-link">Services</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Blog</a>
+                        <div class="dropdown-menu m-0">
+                            {{-- @foreach ($books as $item)
+                            <a href="{{route("landingpage-listbook",$item->id)}}" class="dropdown-item">Semua</a>
+                            @endforeach --}}
+                            @foreach ($category as $item)
+                                {{-- <a href="{{route("book-category",$item->id)}}" class="nav-item nav-link">{{$item->name}}</a> --}}
+                                <a href="{{route("landingpage-listbook",$item->id)}}" class="dropdown-item">{{$item->name}}</a>
+                            @endforeach  
+                        </div>
+                    </div>
+                    {{-- <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                        <div class="dropdown-menu m-0">
+                            <a href="price.html" class="dropdown-item">Pricing Plan</a>
+                            <a href="feature.html" class="dropdown-item">Our features</a>
+                            <a href="team.html" class="dropdown-item">Team Members</a>
+                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                            <a href="quote.html" class="dropdown-item">Free Quote</a>
+                        </div>
+                    </div> --}}
+                    <a href="#" class="nav-item nav-link">Contact</a>
+                </div>
+                <butaton type="button" class="btn text-primary ms-3" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></butaton>
+                <a href="https://htmlcodex.com/startup-company-website-template" class="btn btn-primary py-2 px-4 ms-3">Download Pro Version</a>
             </div>
-            <butaton type="button" class="btn text-primary ms-3" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></butaton>
-            <a href="https://htmlcodex.com/startup-company-website-template" class="btn btn-primary py-2 px-4 ms-3">Download Pro Version</a>
-        </div>
     </nav>
 </div>
 <!-- Topbar End -->
@@ -54,8 +76,11 @@
     <div class="container-fluid bg-primary py-5 bg-header" style="margin-bottom: 90px;">
         <div class="row py-5">
             <div class="col-12 pt-lg-5 mt-lg-5 text-center">
-                {{-- <h1 class="display-4 text-white animated zoomIn">Lihat Buku</h1> --}}
-                <a href="" class="h5 text-white">{{$books->category->name}}</a>
+                <h1 class="display-4 text-white animated zoomIn">Ebook {{$books->category->name}}</h1>
+                <a href="#" class="h5 text-white">Home</a>
+                <i class="far fa-circle text-white px-2"></i>
+                <a href="#" class="h5 text-white">{{$books->category->name}}</a>
+                {{-- <a href="" class="h5 text-white">{{$books->category->name}}</a> --}}
             </div>
         </div>
     </div>
