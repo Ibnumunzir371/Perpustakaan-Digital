@@ -215,7 +215,7 @@
                                 </div>
                                 <h4 class="mb-3">{{$post->name}}</h4>
                                 <p>Dolor et eos labore stet justo sed est sed sed sed dolor stet amet</p>
-                                <a class="text-uppercase" href="">Read More <i class="bi bi-arrow-right"></i></a>
+                                <a class="text-uppercase" href="{{ asset('storage/file/'.$post->file_book) }}">Read More <i class="bi bi-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>

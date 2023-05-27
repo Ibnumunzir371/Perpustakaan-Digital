@@ -127,7 +127,10 @@
                                     </div>
                                     <h4 class="mb-3">{{$all->name}}</h4>
                                     <p>Dolor et eos labore stet justo sed est sed sed sed dolor stet amet</p>
-                                    <a class="text-uppercase" href="{{ asset('storage/'.$all->file_book) }}" >Read More <i class="bi bi-arrow-right"></i></a>
+                                    
+                                    <a class="text-uppercase" href="{{ asset('storage/file/'.$all->file_book) }}">Read More <i class="bi bi-arrow-right"></i></a>
+                        
+                                    
                                 </div>
                             </div>
                         </div>
@@ -190,7 +193,7 @@
                     @foreach ($books_terbaru as $post)
                         <div class="d-flex rounded overflow-hidden mb-3">
                             <img class="img-fluid" src="{{ asset('storage/'.$post->cover_book) }}" style="width: 100px; height: 100px; object-fit: cover;" alt="">
-                            <a href="#" class="h5 fw-semi-bold d-flex align-items-center bg-light px-3 mb-0">{{$post->name}}
+                            <a href="{{ asset('storage/file/'.$post->file_book) }}" class="h5 fw-semi-bold d-flex align-items-center bg-light px-3 mb-0">{{$post->name}}
                             </a>
                         </div>
                     @endforeach

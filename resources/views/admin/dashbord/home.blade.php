@@ -29,6 +29,7 @@
 <div class="container">
     <h1>Welcome, {{Auth::user()->name}}</h1>
 
+    @if (Auth::user()->role == "admin")
     <div class="row mt-5">
         <div class="col-lg-3">
             <div class="card-data">
@@ -76,7 +77,10 @@
         </div>
     </div>
 </div>
+@endif
 
+{{-- halaman user --}}
+@if (Auth::user()->role == "user")
 <div class="card card-body mt-5">
     <div class="page-header">
         <div class="page-block">
@@ -109,4 +113,5 @@
         </div>
     </div>
 </div>
+@endif
 @endsection

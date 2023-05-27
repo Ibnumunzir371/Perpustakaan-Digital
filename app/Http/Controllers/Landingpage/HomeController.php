@@ -7,7 +7,9 @@ use App\Models\book;
 use App\Models\category;
 use App\Models\User;
 use Illuminate\Http\Request;
-use PDF;
+// use Dompdf\Dompdf;
+use Barryvdh\DomPDF\Facade\PDF;
+// use PDF;
 
 class HomeController extends Controller
 {
@@ -22,6 +24,7 @@ class HomeController extends Controller
 
     public function listbook($id){
         $category = category::all();
+        // $books = book::table('book')->where('id', $id)->first();
         $books = book::findOrFail($id);
         // menangkap 1 kategori berdasarkan id tanpa looping
         $bookall = $books->with("category")->where("category_id",$id)->get();
@@ -33,7 +36,17 @@ class HomeController extends Controller
         // return $books;
     }
 
-    public function showpdf(){
-        
-    }
+    // public function showpdf($id){
+
+    //     //Ambil data dari tabel atau sumber lainnya
+    //     $books = book::findOrFail($id);
+    //     // menangkap 1 kategori berdasarkan id tanpa looping
+    //     // $bookall = $books->select('file_book')->get();
+    //     $bookall = $books->with("category")->where("category_id",$id)->get();
+
+    //     $pdf = PDF::loadView('landingpage.show-pdf', compact('bookall'));
+
+    //     // Tampilkan PDF di browser atau unduh file
+    //     return $pdf->stream();
+    //     }
 }
