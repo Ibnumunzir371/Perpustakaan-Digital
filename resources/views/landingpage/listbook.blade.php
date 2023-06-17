@@ -27,45 +27,73 @@
 
 <div class="container-fluid position-relative p-0">
     <nav class="navbar navbar-expand-lg navbar-dark px-5 py-3 py-lg-0">
-        <a href="index.html" class="navbar-brand p-0">
-            <h1 class="m-0"><img src="{{asset("backend/images/logo-mini.svg")}}"> E-LIBRARY</h1>
-            {{-- <a class="navbar-brand brand-logo mr-5" href="#"><img src="{{asset("backend/images/logo-web2.png")}}" class="mr-2" alt="logo"/></a> --}}
+        <a href="#" class="navbar-brand p-0">
+            <h1 class="m-0"><img src="{{asset("admin/img/logo6.png")}}"> E-LIBRARY</h1>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="fa fa-bars"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
-                <div class="navbar-nav ms-auto py-0">
-                    <a href="{{route("landingpage-index")}}" class="nav-item nav-link active">Home</a>
-                    <a href="#" class="nav-item nav-link">About</a>
-                    <a href="#" class="nav-item nav-link">Services</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Blog</a>
-                        <div class="dropdown-menu m-0">
-                            {{-- @foreach ($books as $item)
-                            <a href="{{route("landingpage-listbook",$item->id)}}" class="dropdown-item">Semua</a>
-                            @endforeach --}}
-                            @foreach ($category as $item)
-                                {{-- <a href="{{route("book-category",$item->id)}}" class="nav-item nav-link">{{$item->name}}</a> --}}
-                                <a href="{{route("landingpage-listbook",$item->id)}}" class="dropdown-item">{{$item->name}}</a>
-                            @endforeach  
-                        </div>
+            <div class="navbar-nav ms-auto py-0">
+                <a href="{{route("landingpage-index")}}" class="nav-item nav-link active">Home</a>
+                <a href="#" class="nav-item nav-link">About</a>
+                <a href="#" class="nav-item nav-link">Services</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Kategori</a>
+                    <div class="dropdown-menu m-0">
+                        @foreach ($category as $item)
+                            {{-- <a href="{{route("book-category",$item->id)}}" class="nav-item nav-link">{{$item->name}}</a> --}}
+                            <a href="{{route("landingpage-listbook",$item->id)}}" class="dropdown-item">{{$item->name}}</a>
+                        @endforeach  
                     </div>
-                    {{-- <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                        <div class="dropdown-menu m-0">
-                            <a href="price.html" class="dropdown-item">Pricing Plan</a>
-                            <a href="feature.html" class="dropdown-item">Our features</a>
-                            <a href="team.html" class="dropdown-item">Team Members</a>
-                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                            <a href="quote.html" class="dropdown-item">Free Quote</a>
-                        </div>
-                    </div> --}}
-                    <a href="#" class="nav-item nav-link">Contact</a>
                 </div>
-                <butaton type="button" class="btn text-primary ms-3" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></butaton>
-                <a href="https://htmlcodex.com/startup-company-website-template" class="btn btn-primary py-2 px-4 ms-3">Download Pro Version</a>
+                {{-- <a href="#" class="nav-item nav-link">
+                    <i class="bi bi-gear"></i>
+                </a> --}}
+                
             </div>
+            @guest
+            <div class="ms-3">
+                <a href="{{route("login")}}"><button class="btn btn-success">Login</button></a>
+            </div>
+            @endguest
+            {{-- <div>
+                <form action="{{('login')}}" method="POST">
+                    @csrf
+                    <button class="btn btn-succes">Login</button>
+                </form>
+            </div> --}}
+            
+        </div>
+
+        {{-- @if (Auth::user()->role == "admin") --}}
+        @auth <!-- Hanya tampilkan menu Settings ketika user sudah login -->
+            @if (Auth::user()->role == 'user' || Auth::user()->role == 'admin')
+                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                    <img src="{{asset("admin/img/profile-img.jpg")}}" alt="Profile" class="rounded-circle " width="45" height="45">
+                    <span class="d-none d-md-block dropdown-toggle ps-2"></span>
+                </a><!-- End Profile Iamge Icon -->
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                    <li class="dropdown-header">
+                    <h6>{{Auth::user()->name }}</h6>
+                    
+                    </li>
+                    <li>
+                    <hr class="dropdown-divider">
+                    </li>            
+                    <li>
+                        <a href="{{route("home")}}" class="dropdown-item"><i class="bi bi-box-arrow-right"></i></i> dashboard</a>
+                        <a class="dropdown-item" data-toggle="modal" data-target="#logoutModal" >
+                            <form action="{{('logout')}}" method="POST">
+                            @csrf
+                            <button class="btn btn-light"><i class="bi bi-power"></i> Sign Out</button>
+                            </form>
+                        </a>
+                    </li>
+                </ul> 
+            @endif
+        @endauth
+        {{-- @endif --}}
     </nav>
 </div>
 <!-- Topbar End -->
@@ -127,8 +155,19 @@
                                     </div>
                                     <h4 class="mb-3">{{$all->name}}</h4>
                                     <p>Dolor et eos labore stet justo sed est sed sed sed dolor stet amet</p>
-                                    
-                                    <a class="text-uppercase" href="{{ asset('storage/file/'.$all->file_book) }}">Read More <i class="bi bi-arrow-right"></i></a>
+                                    <div class="mb-2">
+                                        <a href="{{ route('detail-loan', $all->id) }}" class="btn btn-primary mb-2">Detail Buku</a>
+                                    </div>
+                                    @auth <!-- Hanya tampilkan menu Settings ketika user sudah login -->
+                                        @if (Auth::user()->role == 'user' || Auth::user()->role == 'admin')
+                                            @if ($all->type_book == 'digital')
+                                                <a class="text-uppercase" href="{{ asset('storage/file/'.$all->file_book) }}">Baca Buku <i class="bi bi-arrow-right"></i></a>
+                                            @else
+                                                <a class="text-uppercase" href="#">Tidak tersedia secara virtual</a>
+                                            @endif
+                                        @endif
+                                    @endauth
+                                    {{-- <a class="text-uppercase" href="{{ asset('storage/file/'.$all->file_book) }}">Baca Buku <i class="bi bi-arrow-right"></i></a> --}}
                         
                                     
                                 </div>
@@ -140,21 +179,21 @@
                     
                     <div class="col-12 wow slideInUp" data-wow-delay="0.1s">
                         <nav aria-label="Page navigation">
-                          <ul class="pagination pagination-lg m-0">
+                            <ul class="pagination pagination-lg m-0">
                             <li class="page-item disabled">
-                              <a class="page-link rounded-0" href="#" aria-label="Previous">
+                                <a class="page-link rounded-0" href="#" aria-label="Previous">
                                 <span aria-hidden="true"><i class="bi bi-arrow-left"></i></span>
-                              </a>
+                                </a>
                             </li>
                             <li class="page-item active"><a class="page-link" href="#">1</a></li>
                             <li class="page-item"><a class="page-link" href="#">2</a></li>
                             <li class="page-item"><a class="page-link" href="#">3</a></li>
                             <li class="page-item">
-                              <a class="page-link rounded-0" href="#" aria-label="Next">
+                                <a class="page-link rounded-0" href="#" aria-label="Next">
                                 <span aria-hidden="true"><i class="bi bi-arrow-right"></i></span>
-                              </a>
+                                </a>
                             </li>
-                          </ul>
+                            </ul>
                         </nav>
                     </div>
                 </div>
@@ -185,7 +224,7 @@
                 </div>
                 <!-- Category End -->
 
-                <!-- Recent Post Start -->
+                {{-- <!-- Recent Post Start -->
                 <div class="mb-5 wow slideInUp" data-wow-delay="0.1s">
                     <div class="section-title section-title-sm position-relative pb-3 mb-4">
                         <h3 class="mb-0">Recent Post</h3>
@@ -198,48 +237,7 @@
                         </div>
                     @endforeach
                     
-                </div>
-                <!-- Recent Post End -->
-
-                <!-- Image Start -->
-                {{-- <div class="mb-5 wow slideInUp" data-wow-delay="0.1s">
-                    <img src="img/blog-1.jpg" alt="" class="img-fluid rounded">
                 </div> --}}
-                <!-- Image End -->
-
-                <!-- Tags Start -->
-                {{-- <div class="mb-5 wow slideInUp" data-wow-delay="0.1s">
-                    <div class="section-title section-title-sm position-relative pb-3 mb-4">
-                        <h3 class="mb-0">Tag Cloud</h3>
-                    </div>
-                    <div class="d-flex flex-wrap m-n1">
-                        <a href="" class="btn btn-light m-1">Design</a>
-                        <a href="" class="btn btn-light m-1">Development</a>
-                        <a href="" class="btn btn-light m-1">Marketing</a>
-                        <a href="" class="btn btn-light m-1">SEO</a>
-                        <a href="" class="btn btn-light m-1">Writing</a>
-                        <a href="" class="btn btn-light m-1">Consulting</a>
-                        <a href="" class="btn btn-light m-1">Design</a>
-                        <a href="" class="btn btn-light m-1">Development</a>
-                        <a href="" class="btn btn-light m-1">Marketing</a>
-                        <a href="" class="btn btn-light m-1">SEO</a>
-                        <a href="" class="btn btn-light m-1">Writing</a>
-                        <a href="" class="btn btn-light m-1">Consulting</a>
-                    </div>
-                </div>
-                <!-- Tags End -->
-
-                <!-- Plain Text Start -->
-                <div class="wow slideInUp" data-wow-delay="0.1s">
-                    <div class="section-title section-title-sm position-relative pb-3 mb-4">
-                        <h3 class="mb-0">Plain Text</h3>
-                    </div>
-                    <div class="bg-light text-center" style="padding: 30px;">
-                        <p>Vero sea et accusam justo dolor accusam lorem consetetur, dolores sit amet sit dolor clita kasd justo, diam accusam no sea ut tempor magna takimata, amet sit et diam dolor ipsum amet diam</p>
-                        <a href="" class="btn btn-primary py-2 px-4">Read More</a>
-                    </div>
-                </div> --}}
-                <!-- Plain Text End -->
             </div>
             <!-- Sidebar End -->
         </div>

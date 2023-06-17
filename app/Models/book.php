@@ -12,9 +12,11 @@ class book extends Model
     protected $fillable = [
         'name',
         'category_id',
+        'type_book',
+        'amount_id',
         'author',
         'year',
-        'status',
+        'add',
         'file_book',
         'cover_book',
     ];
@@ -24,4 +26,5 @@ class book extends Model
         return $this->belongsTo(category::class);
         // return $this->hasMany(category::class);
     }
+
 }

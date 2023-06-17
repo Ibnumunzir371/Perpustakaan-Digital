@@ -43,3 +43,7 @@
 
 <!-- Template Stylesheet -->
 <link href="{{asset("landingpage/css/style.css")}}" rel="stylesheet">
+
+
+{{-- link templete admin --}}
+

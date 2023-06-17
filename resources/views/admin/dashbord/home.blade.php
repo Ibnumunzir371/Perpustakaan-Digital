@@ -26,6 +26,8 @@
 @extends('backend.master')
 
 @section('content')
+
+
 <div class="container">
     <h1>Welcome, {{Auth::user()->name}}</h1>
 
@@ -56,10 +58,10 @@
         <div class="col-lg-3">
             <div class="card-data">
                 <div class="row">
-                    <div class="col-6"><i class="bi bi-person-lines-fill"></i></div>
+                    <div class="col-6"><i class="bi bi-journal-text"></i></div>
                     <div class="col-6 d-flex flex-column justify-content-center align-items-end">
-                        <div class="card-desc">Daftar Peminjaman</div>
-                        <div class="card-count">100</div>
+                        <div class="card-desc">Total Category</div>
+                        <div class="card-count">{{$categorycount}}</div>
                     </div>
                 </div>
             </div>
@@ -67,10 +69,10 @@
         <div class="col-lg-3">
             <div class="card-data">
                 <div class="row">
-                    <div class="col-6"><i class="bi bi-file-text"></i></div>
+                    <div class="col-6"><i class="bi bi-person-lines-fill"></i></div>
                     <div class="col-6 d-flex flex-column justify-content-center align-items-end">
-                        <div class="card-desc">Daftar Pengembalian</div>
-                        <div class="card-count">100</div>
+                        <div class="card-desc">Daftar Peminjaman</div>
+                        <div class="card-count">{{$loancount}}</div>
                     </div>
                 </div>
             </div>
@@ -85,18 +87,17 @@
     <div class="page-header">
         <div class="page-block">
                 <div class="row align-items-center ">
-                    <div class="col-md-8">
-                        <h3>Buku Pinjamanku</h3>
+                    <div class="pagetitle">
+                        <h2 class="mt-3">Buku Dipinjam</h2>
                     </div>
-                    
                 </div>
             <hr class="sidebar-divider">
         </div>
         <div class="mt-4">
             <div class="row">
-                <div class="col py-3">
+                {{-- <div class="col py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Daftar Transaksi Masuk</h6>
-                </div>
+                </div> --}}
                 
                 <div class="col text-right">
                     <button type="button" class="btn btn-primary plus" data-bs-toggle="modal" data-bs-target="#pemasukanModal">

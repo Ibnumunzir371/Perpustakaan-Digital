@@ -34,10 +34,12 @@
     <form action="{{route("category-update", $category->id)}}" method="post">
         @csrf
         @method("put")
-        <h1>Edit Data Category</h1>
+        <div class="pagetitle">
+            <h2 class="mt-3 mb-3">Edit Data Kategori</h2>
+        </div>
         <div class="mb-3">
             <label for="name" class="form-label">Nama Kategori</label>
-            <input name="name" type="text" value="name" class="form-control" id="name" >
+            <input name="name" type="text" value="{{$category->name}}" class="form-control" id="name" >
             @error('name')
             <span class="text-danger">
                 <strong>{{ $message }}</strong>

@@ -39,15 +39,19 @@
 
   {{-- script datatables --}}
   <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+  {{-- script select 2 --}}
+  {{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script> --}}
 
-{{-- script landingpage --}}
-  {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="{{asset("landingpage/lib/wow/wow.min.js")}}"></script>
-  <script src="{{asset("landingpage/lib/easing/easing.min.js")}}"></script>
-  <script src="{{asset("landingpage/lib/waypoints/waypoints.min.js")}}"></script>
-  <script src="{{asset("landingpage/lib/owlcarousel/owl.carousel.min.js")}}"></script>
-  <script src="{{asset("landingpage/lib/lightbox/js/lightbox.min.js")}}"></script>
+<!-- template nice admin -->
+<script src="{{asset("admin/vendor/apexcharts/apexcharts.min.js")}}"></script>
+<script src="{{asset("admin/vendor/bootstrap/js/bootstrap.bundle.min.js")}}"></script>
+<script src="{{asset("admin/vendor/chart.js/chart.umd.js")}}"></script>
+<script src="{{asset("admin/vendor/echarts/echarts.min.js")}}"></script>
+<script src="{{asset("admin/vendor/quill/quill.min.js")}}"></script>
+<script src="{{asset("admin/vendor/simple-datatables/simple-datatables.js")}}"></script>
+<script src="{{asset("admin/vendor/tinymce/tinymce.min.js")}}"></script>
+<script src="{{asset("admin/vendor/php-email-form/validate.js")}}"></script>
 
-  <!-- Template Javascript -->
-  <script src="{{asset("landingpage/js/main.js")}}"></script> --}}
+<!-- Template Main JS File -->
+<script src="{{asset("admin/js/main.js")}}"></script>

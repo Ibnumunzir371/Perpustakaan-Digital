@@ -14,9 +14,11 @@ return new class extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->String("name");
+            $table->enum('type_book',['digital','fisik']);
             $table->String("author");
             $table->String("year");
-            $table->String("status");
+            $table->String("add");
+            $table->String("amount_id");
             $table->String("file_book");
             $table->String("cover_book");
             $table->foreignId("category_id")->constrained("categories")->onUpdate("cascade")->onDelete("cascade");

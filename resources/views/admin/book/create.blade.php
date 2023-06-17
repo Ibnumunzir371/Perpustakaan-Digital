@@ -3,7 +3,9 @@
 <div class="card card-body">
     <form action="{{route("book-store")}}" method="post" enctype="multipart/form-data">
         @csrf
-        <h1>Tambahkan Data</h1>
+        <div class="pagetitle">
+            <h2 class="mt-3 mb-3">Tambahkan Data</h2>
+        </div>
         <div class="mb-3">
             <label for="name" class="form-label">Nama Buku</label>
             <input name="name" type="text" placeholder="Masukkan nama buku" class="form-control" id="name" value="{{ old('name')}}">
@@ -20,6 +22,19 @@
                 @foreach ($category as $item)
                     <option value="{{$item->id}}">{{$item->name}}</option>
                 @endforeach
+            </select>
+            @error('category_id')
+            <span class="text-danger">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+        </div>
+        <div class="form-group">
+            <label for="type_book" class="form-label">Jenis Buku</label>
+            <select class="form-control" name="type_book" id="type_book" >
+                <option label="pilih jenis Buku"></option>
+                <option value="digital">Digital</option>
+                <option value="fisik">Fisik</option>
             </select>
             @error('category_id')
             <span class="text-danger">
@@ -46,9 +61,18 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label for="status" class="form-label">Status</label>
-            <input name="status" type="text" placeholder="Masukkan nama status" class="form-control" id="status" value="{{ old('status')}}">
-            @error('status')
+            <label for="add" class="form-label">Lokasi</label>
+            <input name="add" type="text" placeholder="Masukkan lokasi buku" class="form-control" id="add" value="{{ old('add')}}">
+            @error('add')
+            <span class="text-danger">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+        </div>
+        <div class="mb-3">
+            <label for="amount_id" class="form-label">Stock</label>
+            <input name="amount_id" type="text" placeholder="Masukkan jumlah stock" class="form-control" id="amount_id" value="{{ old('amount_id')}}">
+            @error('amount_id')
             <span class="text-danger">
                 <strong>{{ $message }}</strong>
             </span>

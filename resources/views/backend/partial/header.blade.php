@@ -1,65 +1,78 @@
-<nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-  <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-    <a class="navbar-brand brand-logo mr-5" href="#"><img src="{{asset("backend/images/logo-web2.png")}}" class="mr-2" alt="logo"/></a>
-    <a class="navbar-brand brand-logo-mini" href="#"><img src="{{asset("backend/images/logo-mini.svg")}}" alt="logo"/></a>
-  </div>
-  <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
-    <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-      <span class="icon-menu"></span>
-    </button>
-    {{-- <ul class="navbar-nav mr-lg-2">
-      <li class="nav-item nav-search d-none d-lg-block">
-        <div class="input-group">
-          <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
-            <span class="input-group-text" id="search">
-              <i class="icon-search"></i>
-            </span>
-          </div>
-          <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
-        </div>
-      </li>
-    </ul> --}}
-    <ul class="navbar-nav navbar-nav-right">
-      <li class="nav-item nav-profile dropdown" >
-        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown" role="button">
-          <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->name }}</span>
-          <img src="{{asset("backend/images/faces/face28.jpg")}}" alt="profile"/>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown" >
-          <a class="dropdown-item" data-toggle="modal" data-target="#logoutModal" >
-            {{-- <form action="{{('logout')}}" method="POST">
-              @csrf
-              <i class="ti-power-off text-primary"></i>
-              Logout --}}
-            <form action="{{('logout')}}" method="POST">
-              @csrf
-              <button class="btn btn-light"><i class="ti-power-off text-primary"></i>Logout</button>
-              
-            </form>
-            {{-- </form> --}}
-          </a>
-        </div>
-      </li>
-      
-    </ul>
-    {{-- <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-      <div class="modal-dialog" role="document">
-          <div class="modal-content">
-              <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Apakah Anda ingin Logout ?</h5>
-              </div>
 
-              <div class="modal-footer">
-                  <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                  <form action="{{('logout')}}" method="POST">
-                      @csrf
-                      <button class="btn btn-primary">Logout</button>
-                  </form>
-              </div>
-          </div>
-      </div>
-    </div> --}}
-  </div>
+
+<header id="header" class="header fixed-top d-flex align-items-center">
+
+  <div class="d-flex align-items-center justify-content-between">
+    <a href="index.html" class="logo d-flex align-items-center">
+      <img src="{{asset("admin/img/logo7.png")}}" alt="">
+      <span class="d-none d-lg-block">E-LIBRARY</span>
+    </a>
+    <i class="bi bi-list toggle-sidebar-btn"></i>
+  </div><!-- End Logo -->
+
+  <div class="search-bar">
+    <form class="search-form d-flex align-items-center" method="POST" action="#">
+      <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+      <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+    </form>
+  </div><!-- End Search Bar -->
+
+  <nav class="header-nav ms-auto">
+    <ul class="d-flex align-items-center">
+
+      <li class="nav-item d-block d-lg-none">
+        <a class="nav-link nav-icon search-bar-toggle " href="#">
+          <i class="bi bi-search"></i>
+        </a>
+      </li><!-- End Search Icon-->
+
+
+      <li class="nav-item dropdown pe-3">
+
+        <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+          <img src="{{asset("admin/img/profile-img.jpg")}}" alt="Profile" class="rounded-circle">
+          <span class="d-none d-md-block dropdown-toggle ps-2">{{Auth::user()->name }}</span>
+        </a><!-- End Profile Iamge Icon -->
+
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+          <li class="dropdown-header">
+            <h6>{{Auth::user()->name }}</h6>
+            
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="#" data-toggle="modal" data-target="#logoutModal">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sign Out</span>
+              </a>
+            </li>
+
+          </ul><!-- End Profile Dropdown Items -->
+        </li><!-- End Profile Nav -->
+
+    </ul>
+    
+  </nav><!-- End Icons Navigation -->
   
-</nav>
+</header>
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Apakah Anda ingin Logout ?</h5>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <form action="{{('logout')}}" method="POST">
+                    @csrf
+                    <button class="btn btn-primary">Logout</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

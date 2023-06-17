@@ -34,7 +34,9 @@
     <form action="{{route("book-update", $book->id)}}" method="post" enctype="multipart/form-data">
         @csrf
         @method("put")
-        <h1>Tambahkan Data</h1>
+        <div class="pagetitle">
+            <h2 class="mt-3 mb-3">Edit Data Buku</h2>
+        </div>
         <div class="mb-3">
             <label for="name" class="form-label">Nama Buku</label>
             <input name="name" value="{{$book->name}}" type="text" placeholder="Masukkan nama buku" class="form-control" id="name" >
@@ -76,9 +78,9 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label for="status" class="form-label">Status</label>
-            <input name="status" value="{{$book->status}}" type="text" placeholder="Masukkan nama status" class="form-control" id="status" >
-            @error('status')
+            <label for="amount_id" class="form-label">Stock</label>
+            <input name="amount_id" value="{{$book->amount_id}}" type="text" placeholder="Masukkan stock" class="form-control" id="amount_id" >
+            @error('amount_id')
             <span class="text-danger">
                 <strong>{{ $message }}</strong>
             </span>

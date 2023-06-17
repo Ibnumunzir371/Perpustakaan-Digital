@@ -1,4 +1,4 @@
-<div class="container-fluid bg-dark px-5 d-none d-lg-block">
+{{-- <div class="container-fluid bg-dark px-5 d-none d-lg-block">
     <div class="row gx-0">
         <div class="text-center mb-2 mb-lg-0">
             <div class="d-inline-flex align-items-center" style="height: 45px;">
@@ -14,8 +14,8 @@
                 <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle" href=""><i class="fab fa-youtube fw-normal"></i></a>
             </div>
         </div> --}}
-    </div>
-</div>
+    {{-- </div>
+</div> --}}
 <!-- Topbar End -->
 
 {{-- <div class="bg-gray-900">

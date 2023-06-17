@@ -57,22 +57,25 @@
 @extends('backend.master')
 @section('content')
 
+<div class="card body-card">
+    <div class="card-body">
+        <div class="pagetitle">
+        <h1>Daftar Kategori</h1>
+        <hr class="text-dark">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{route("home")}}">Home</a></li>
+            <li class="breadcrumb-item active">Daftar Kategori</li>
+            </ol>
+        </nav>
+        </div>
+    </div>
+</div>
 <div class="card card-body">
     <div class="page-header">
         <div class="page-block">
-                <div class="row align-items-center">
-                    <div class="col-md-8">
-                        <h3>Daftar Kategori</h3>
-
-                        {{-- <ul class="breadcrumb">
-                            <li class="breadcrumb-item">Koleksi Ebook</li>
-                        </ul> --}}
-                        
-                    </div>
-                    
-                </div>
-            <hr class="sidebar-divider">
-            <div>
+            <div class="d-flex justify-content-between align-items-center mt-4">
+                {{-- <h3 class="mb-0">Daftar Buku</h3> --}}
                 <a href="{{route("category-create")}}"><button class="btn btn-primary">+ Kategori</button></a>
             </div>
         </div>
@@ -125,7 +128,7 @@
                 <td>{{$item->name}}</td>
                 <td>
                     <a class="btn btn-primary" href="{{route("category-edit", $item->id)}}">
-                        Edit
+                        <i class="bi bi-pencil-square"></i>
                     </a>
                     <form action="{{route("category-delete", $item->id)}}"
                         method="post" style="display: inline"
@@ -133,7 +136,7 @@
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger"
-                        type="submit">Hapus</button>
+                        type="submit" ><i class="bi bi-trash3"></i></button>
                     </form>
                 </td>
                 </tr>

@@ -27,11 +27,13 @@ class BookController extends Controller
     public function store(Request $request){
         $this->validate($request, [
             'name' => 'required|unique:books',
+            'type_book' => 'required',
             'author' => 'required',
             'year' => 'required|numeric',
-            'status' => 'required',
+            'amount_id' => 'required',
+            'add' => 'required',
             'category_id' => 'required',
-            'cover_book' => 'required|image|mimes:jpg,png,jpeg|max:2048',
+            'cover_book' => 'required|image|mimes:jpg,png,jpeg|max:2048',               
             'file_book' => 'required|mimes:pdf',
         ]);
         
@@ -48,10 +50,12 @@ class BookController extends Controller
         // $book = book::create($request->all());
         $book = new book;
         $book->name = $request->get('name');
+        $book->type_book = $request->get('type_book');
         $book->category_id = $request->get('category_id');
         $book->author = $request->get('author');
         $book->year = $request->get('year');
-        $book->status = $request->get('status');
+        $book->add = $request->get('add');
+        $book->amount_id = $request->get('amount_id');
 
         $pdf = '';
         if ($request->file('file_book')){
@@ -70,6 +74,7 @@ class BookController extends Controller
 
         $book->save();
 
+        // return response()->json($category1);
         return redirect()->route("book-index");
         
     }
@@ -83,17 +88,7 @@ class BookController extends Controller
     }
 
     public function destroy($id){
-        // $book = book::where("id", $id)->first();
-        // $book ->delete();
         $book = book::findOrFail($id);
-        // $pathfile = $book->file_book;
-        // hapus file yang terkait dengan buku
-        // if($pathfile != null || $pathfile != ''){
-        // $coba = Storage::disk('public')->delete($book->file_book);
-        // }
-        // Storage::delete('public/file'.$book->file_book);
-
-        // hapus record buku dari database
         $book->delete();
 
         return redirect()->route("book-index");
@@ -101,14 +96,13 @@ class BookController extends Controller
     }
 
     public function update(Request $request, $id){
-        // $book = book::where("id", $id)->first();
-        // $book->update($request->all());
-
         $this->validate($request, [
             'name' => 'required',
+            'type_book' => 'required',
             'author' => 'required',
             'year' => 'required|numeric',
-            'status' => 'required',
+            'amount_id' => 'required',
+            'add' => 'required',
             'category_id' => 'required',
             'cover_book' => 'image|mimes:jpg,png,jpeg|max:2048',
             'file_book' => 'mimes:pdf',
@@ -117,9 +111,11 @@ class BookController extends Controller
         $book = book::findOrFail($id);
         $book->name = $request->get('name');
         $book->category_id = $request->get('category_id');
+        $book->type_book = $request->get('type_book');
         $book->author = $request->get('author');
         $book->year = $request->get('year');
-        $book->status = $request->get('status');
+        $book->add = $request->get('add');
+        $book->amount_id = $request->get('amount_id');
 
         // Ketika melakukan pengecekan apakah file lama masih ada atau sudah dihapus,
         // perlu diganti fungsi file_exists dengan fungsi Storage::disk(). 

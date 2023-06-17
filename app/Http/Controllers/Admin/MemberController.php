@@ -26,4 +26,37 @@ class MemberController extends Controller
 
         return redirect()->route("member-index");
     }
+
+    public function create(){
+        
+        return view('admin.member.create');
+    }
+
+    public function store(Request $request){
+        $this->validate($request, [
+            'nis' => 'required|unique:users',
+            'class' => 'required',
+            'name' => 'required',
+            'role' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+
+        User::create($request->all());
+
+        return redirect()->route("member-index");
+    }
+
+    public function edit($id){
+        $member = User::where("id", $id)->first();
+
+        return view('admin.member.edit',compact("member"));
+    }
+
+    public function update(Request $request, $id){
+        $member = User::where("id", $id)->first();
+        $member->update($request->all());
+
+        return redirect()->route("member-index");
+    }
 }

@@ -13,10 +13,6 @@ class category extends Model
         'name',
     ];
 
-    // public function book()
-    // {
-    //     // return $this->belongsTo(category::class);
-    //     return $this->hasMany(book::class);
-    // }
+
 }
 

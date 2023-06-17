@@ -33,7 +33,9 @@
 <div class="card card-body">
     <form action="{{route("category-store")}}" method="post">
         @csrf
-        <h1>Tambahkan Data</h1>
+        <div class="pagetitle">
+            <h2 class="mt-3 mb-3">Tambahkan Data</h2>
+        </div>
         <div class="mb-3">
             <label for="name" class="form-label">Nama Kategori</label>
             <input name="name" type="text" placeholder="Masukkan nama kategori book" class="form-control" id="name" >

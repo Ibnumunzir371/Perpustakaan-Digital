@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nis')->unique();
             $table->string('class');
             $table->string('name');
-            $table->string('role');
+            $table->enum('role',['admin','user']);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

@@ -19,7 +19,6 @@
     </div>
     <!-- Spinner End -->
 
-
     <!-- Topbar Start -->
     @include('landingpage.partial.header')
     <!-- Topbar End -->
@@ -29,7 +28,7 @@
     <div class="container-fluid position-relative p-0">
         <nav class="navbar navbar-expand-lg navbar-dark px-5 py-3 py-lg-0">
             <a href="#" class="navbar-brand p-0">
-                <h1 class="m-0"><img src="{{asset("backend/images/logo-mini.svg")}}"> E-LIBRARY</h1>
+                <h1 class="m-0"><img src="{{asset("admin/img/logo6.png")}}"> E-LIBRARY</h1>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="fa fa-bars"></span>
@@ -40,7 +39,7 @@
                     <a href="#" class="nav-item nav-link">About</a>
                     <a href="#" class="nav-item nav-link">Services</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Blog</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Kategori</a>
                         <div class="dropdown-menu m-0">
                             @foreach ($category as $item)
                                 {{-- <a href="{{route("book-category",$item->id)}}" class="nav-item nav-link">{{$item->name}}</a> --}}
@@ -48,27 +47,60 @@
                             @endforeach  
                         </div>
                     </div>
-                    {{-- <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                        <div class="dropdown-menu m-0">
-                            <a href="price.html" class="dropdown-item">Pricing Plan</a>
-                            <a href="feature.html" class="dropdown-item">Our features</a>
-                            <a href="team.html" class="dropdown-item">Team Members</a>
-                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                            <a href="quote.html" class="dropdown-item">Free Quote</a>
-                        </div>
-                    </div> --}}
-                    <a href="#" class="nav-item nav-link">Contact</a>
+                    {{-- <a href="#" class="nav-item nav-link">
+                        <i class="bi bi-gear"></i>
+                    </a> --}}
+                    
                 </div>
-                <butaton type="button" class="btn text-primary ms-3" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></butaton>
-                <a href="https://htmlcodex.com/startup-company-website-template" class="btn btn-primary py-2 px-4 ms-3">Download Pro Version</a>
+                @guest
+                <div class="ms-3">
+                    <a href="{{route("login")}}"><button class="btn btn-success">Login</button></a>
+                </div>
+                @endguest
+                {{-- <div>
+                    <form action="{{('login')}}" method="POST">
+                        @csrf
+                        <button class="btn btn-succes">Login</button>
+                    </form>
+                </div> --}}
+                
             </div>
+
+            {{-- @if (Auth::user()->role == "admin") --}}
+            @auth <!-- Hanya tampilkan menu Settings ketika user sudah login -->
+                @if (Auth::user()->role == 'user' || Auth::user()->role == 'admin')
+                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                        <img src="{{asset("admin/img/profile-img.jpg")}}" alt="Profile" class="rounded-circle " width="45" height="45">
+                        <span class="d-none d-md-block dropdown-toggle ps-2"></span>
+                    </a><!-- End Profile Iamge Icon -->
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                        <li class="dropdown-header">
+                        <h6>{{Auth::user()->name }}</h6>
+                        
+                        </li>
+                        <li>
+                        <hr class="dropdown-divider">
+                        </li>            
+                        <li>
+                            <a href="{{route("home")}}" class="dropdown-item"><i class="bi bi-box-arrow-right"></i></i> dashboard</a>
+                            <a class="dropdown-item" data-toggle="modal" data-target="#logoutModal" >
+                                <form action="{{('logout')}}" method="POST">
+                                @csrf
+                                <button class="btn btn-light"><i class="bi bi-power"></i> Sign Out</button>
+                                </form>
+                            </a>
+                        </li>
+                    </ul>
+                @endif
+            @endauth
+            {{-- @endif --}}
         </nav>
+        
 
         <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="w-100" src="img/carousel-1.jpg" alt="Image">
+                    <img class="w-100" src="{{asset("landingpage/img/bg_perpus8.jpg")}}" alt="Image">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px;">
                             <h5 class="text-white text-uppercase mb-3 animated slideInDown">Creative & Innovative</h5>
@@ -79,7 +111,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="w-100" src="img/carousel-2.jpg" alt="Image">
+                    <img class="w-100" src="{{asset("landingpage/img/bg_perpus8.jpg")}}" alt="Image">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px;">
                             <h5 class="text-white text-uppercase mb-3 animated slideInDown">Creative & Innovative</h5>
@@ -153,11 +185,11 @@
                 <div class="col-lg-4 wow zoomIn" data-wow-delay="0.6s">
                     <div class="bg-primary shadow d-flex align-items-center justify-content-center p-4" style="height: 150px;">
                         <div class="bg-white d-flex align-items-center justify-content-center rounded mb-2" style="width: 60px; height: 60px;">
-                            <i class="fa fa-award text-primary"></i>
+                            <i class="bi bi-journal-text text-primary"></i>
                         </div>
                         <div class="ps-4">
-                            <h5 class="text-white mb-0">Win Awards</h5>
-                            <h1 class="text-white mb-0" data-toggle="counter-up">12345</h1>
+                            <h5 class="text-white mb-0">Total Category</h5>
+                            <h1 class="text-white mb-0" data-toggle="counter-up">{{$categorycount}}</h1>
                         </div>
                     </div>
                 </div>
@@ -170,8 +202,8 @@
     <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container py-5">
             <div class="section-title text-center position-relative pb-3 mb-5 mx-auto" style="max-width: 600px;">
-                <h5 class="fw-bold text-primary text-uppercase">Our Services</h5>
-                <h1 class="mb-0">Custom IT Solutions for Your Successful Business</h1>
+                <h5 class="fw-bold text-primary text-uppercase">Categories</h5>
+                <h1 class="mb-0">Lihat buku berdasarkan kategori</h1>
             </div>
             <div class="row g-5">
                 @foreach ($category as $item)
@@ -197,8 +229,8 @@
     <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container py-5">
             <div class="section-title text-center position-relative pb-3 mb-5 mx-auto" style="max-width: 600px;">
-                <h5 class="fw-bold text-primary text-uppercase">Latest Blog</h5>
-                <h1 class="mb-0">Read The Latest Articles from Our Blog Post</h1>
+                <h5 class="fw-bold text-primary text-uppercase">Latest Book</h5>
+                <h1 class="mb-0">Lihat buku terbaru disini</h1>
             </div>
             <div class="row g-5">
                 @foreach ($books as $post)
@@ -215,7 +247,18 @@
                                 </div>
                                 <h4 class="mb-3">{{$post->name}}</h4>
                                 <p>Dolor et eos labore stet justo sed est sed sed sed dolor stet amet</p>
-                                <a class="text-uppercase" href="{{ asset('storage/file/'.$post->file_book) }}">Read More <i class="bi bi-arrow-right"></i></a>
+                                <div class="mb-2">
+                                    <a href="{{ route('detail-loan', $post->id) }}" class="btn btn-primary mb-2">Detail Buku</a>
+                                </div>
+                                @auth <!-- Hanya tampilkan menu Settings ketika user sudah login -->
+                                    @if (Auth::user()->role == 'user' || Auth::user()->role == 'admin')
+                                        @if ($post->type_book == 'digital')
+                                            <a class="text-uppercase" href="{{ asset('storage/file/'.$post->file_book) }}">Baca Buku <i class="bi bi-arrow-right"></i></a>
+                                        @else
+                                            <a class="text-uppercase" href="#">Tidak tersedia secara virtual</a>
+                                        @endif
+                                    @endif
+                                @endauth
                             </div>
                         </div>
                     </div>
@@ -259,6 +302,7 @@
 
     <!-- JavaScript Libraries -->
     @include('landingpage.partial.js')
+    
 </body>
 
 </html>
