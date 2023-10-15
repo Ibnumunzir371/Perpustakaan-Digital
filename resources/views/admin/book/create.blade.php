@@ -36,7 +36,7 @@
                 <option value="digital">Digital</option>
                 <option value="fisik">Fisik</option>
             </select>
-            @error('category_id')
+            @error('type_book')
             <span class="text-danger">
                 <strong>{{ $message }}</strong>
             </span>

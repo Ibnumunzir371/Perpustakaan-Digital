@@ -8,6 +8,7 @@ use App\Models\category;
 use App\Models\Loan;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -16,10 +17,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     /**
      * Show the application dashboard.
@@ -33,6 +34,18 @@ class HomeController extends Controller
         $loancount = Loan::count();
         $categorycount = category::count();
         // $membercount =
-        return view('admin.dashbord.home', compact('bookcount','membercount','loancount','categorycount'));
+
+        //halaman dashboard user
+        // $loan = Loan::all();
+        // Mendapatkan ID user yang sedang login
+        $userId = Auth::id();
+        
+        // Mengambil data pinjaman sesuai dengan user yang sedang login
+        $loan = Loan::where('user_id', $userId)
+            ->whereIn('status', ['dipinjam'])
+            ->get();
+
+        return view('admin.dashbord.home', compact('bookcount','membercount','loancount','categorycount','loan'));
     }
+
 }

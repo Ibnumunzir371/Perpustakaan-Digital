@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('end_date');
             $table->foreignId("book_id")->constrained('books')->onUpdate('cascade')->onDelete('cascade');
             $table->String('amount');
-            $table->enum('status',['kena denda','dipinjam','dikembalikan']);
+            $table->enum('status',['terlambat','dipinjam','dikembalikan']);
             $table->integer('forfeit')->unsigned()->default(0);
             $table->timestamps();
         });

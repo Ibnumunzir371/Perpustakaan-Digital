@@ -134,8 +134,8 @@
 </div>
 <!-- Full Screen Search End -->
 
- <!-- Blog Start -->
- <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+<!-- Blog Start -->
+<div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
     <div class="container py-5">
         <div class="row g-5">
             <!-- Blog list Start -->
@@ -161,7 +161,7 @@
                                     @auth <!-- Hanya tampilkan menu Settings ketika user sudah login -->
                                         @if (Auth::user()->role == 'user' || Auth::user()->role == 'admin')
                                             @if ($all->type_book == 'digital')
-                                                <a class="text-uppercase" href="{{ asset('storage/file/'.$all->file_book) }}">Baca Buku <i class="bi bi-arrow-right"></i></a>
+                                                <a class="text-uppercase" href="{{ asset('storage/'.$all->file_book) }}">Baca Buku <i class="bi bi-arrow-right"></i></a>
                                             @else
                                                 <a class="text-uppercase" href="#">Tidak tersedia secara virtual</a>
                                             @endif

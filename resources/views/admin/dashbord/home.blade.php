@@ -29,9 +29,9 @@
 
 
 <div class="container">
-    <h1>Welcome, {{Auth::user()->name}}</h1>
-
+    
     @if (Auth::user()->role == "admin")
+    <h1>Welcome, {{Auth::user()->name}}</h1>
     <div class="row mt-5">
         <div class="col-lg-3">
             <div class="card-data">
@@ -83,7 +83,7 @@
 
 {{-- halaman user --}}
 @if (Auth::user()->role == "user")
-<div class="card card-body mt-5">
+{{-- <div class="card card-body mt-5">
     <div class="page-header">
         <div class="page-block">
                 <div class="row align-items-center ">
@@ -95,9 +95,9 @@
         </div>
         <div class="mt-4">
             <div class="row">
-                {{-- <div class="col py-3">
+                <div class="col py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Daftar Transaksi Masuk</h6>
-                </div> --}}
+                </div>
                 
                 <div class="col text-right">
                     <button type="button" class="btn btn-primary plus" data-bs-toggle="modal" data-bs-target="#pemasukanModal">
@@ -113,6 +113,91 @@
             
         </div>
     </div>
+</div> --}}
+
+<div class="card body-card">
+    <div class="card-body">
+        <div class="pagetitle">
+        <h1>Daftar Peminjaman  {{Auth::user()->name}}</h1>
+        {{-- <hr class="text-dark">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{route("home")}}">Home</a></li>
+            <li class="breadcrumb-item active">Daftar Peminjaman</li>
+            </ol>
+        </nav> --}}
+        </div>
+    </div>
+</div>
+<div class="card card-body">
+    <div class="page-header">
+        <div class="page-block">
+            <div class="d-flex justify-content-between align-items-center mt-4">
+                <h3 class="mb-0">Buku yang Dipinjam</h3>
+                {{-- <a href="{{route("loan-create")}}"><button class="btn btn-primary">+ Peminjaman</button></a> --}}
+            </div>
+        </div>
+    </div>
+
+        <table id="myTable" class="display">
+            <thead>
+                <th>No</th>
+                <th>Nis</th>
+                <th>Nama</th>
+                <th>Tanggal Pinjam</th>
+                <th>Batas Pinjam</th>
+                <th>Judul Buku</th>
+                <th>Jumlah Buku</th>
+                <th>Status</th>
+                {{-- <th>Opsi</th> --}}
+            </thead>
+            <tbody>
+                @foreach ($loan as $key => $item)
+                <tr>
+                <th scope="row">{{$key + 1}}</th>
+                <td>{{$item->User->nis}}</td>
+                <td>{{$item->User->name}}</td>
+                <td>{{$item->start_date}}</td>
+                <td>{{$item->end_date}}</td>
+                <td>{{$item->Book->name}}</td>
+                <td>{{$item->amount}}</td>
+                <td>
+                    <div>
+                        @if ($item->status == 'dipinjam')
+                            <span class="badge badge-primary mb-2">{{ $item->status }}</span>
+                        @elseIf ($item->status == 'dikembalikan')
+                            <span class="badge badge-success mb-2">{{ $item->status }}</span>
+                        @else
+                            <span class="badge badge-danger mb-2">{{ $item->status }}</span>
+                        @endif
+                    </div>
+                </td>
+                {{-- <td>
+                    <form action="{{ route('loan-update', $item->id) }}" method="post">
+                        @csrf
+                        @method('PUT')
+                        <button type="submit" class="btn btn-primary"><i class="bi bi-pencil-square"></i></button>
+                    </form>
+                    <form action="{{route("book-destroy", $item->id)}}"
+                        method="post" style="display: inline"
+                        class="form-check-inline">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger"
+                        type="submit" ><i class="bi bi-trash3"></i></button>
+                    </form>
+                </td> --}}
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @section('script')
+    <script>
+    $(document).ready( function () {
+        $('#myTable').DataTable();
+    } );
+    </script>
+    @endsection
 </div>
 @endif
 @endsection

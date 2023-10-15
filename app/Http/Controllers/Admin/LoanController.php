@@ -16,13 +16,13 @@ class LoanController extends Controller
 {
     public function index(Request $request)
     {
-        $today = Carbon::now()->toDateString();
+        // $today = Carbon::now()->toDateString();
 
-        Loan::where('end_date', '<', $today)
-            ->where('status', '!=', 'kena denda')
-            ->update(['status' => 'kena denda']);
+        // Loan::where('end_date', '<', $today)
+        //     ->where('status', '!=', 'kena denda')
+        //     ->update(['status' => 'kena denda']);
 
-        $loans = Loan::with("User", "Book")->get();
+        $loans = Loan::with("User", "Book")->where('status', '=', 'dipinjam')->get();
 
 
         // return response()->json($loans);
@@ -82,7 +82,7 @@ class LoanController extends Controller
     public function return()
     {
         // $loans = Loan::with("User", "Book")->get();
-        $loan = Loan::where('status', 'dikembalikan')->orWhere('status', 'kena denda')->get();
+        $loan = Loan::where('status', 'dikembalikan')->orWhere('status', 'terlambat')->get();
 
         return view('admin.loan.return', [
             'loan' => $loan
@@ -101,8 +101,9 @@ class LoanController extends Controller
         $selisihhari = $data->diffInDays($tanggalhari);
         $forfeit = $selisihhari * 2000;
 
-        if ($loan->status == 'kena denda') {
+        if ($tanggalhari > $data) {
             $loan->update([
+                'status' => 'terlambat',
                 'forfeit' => $forfeit,
             ]);
             return redirect()->route('loan-return');

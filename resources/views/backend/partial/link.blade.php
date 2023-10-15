@@ -37,7 +37,7 @@
 
   <!-- template nice admin -->
   <link href="{{asset("admin/img/favicon.png")}}" rel="icon">
-  <link href="admin/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="{{asset("admin/img/apple-touch-icon.png")}}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
